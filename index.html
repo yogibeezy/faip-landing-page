@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAIP — Free $5K Audit | Fractional AI Partner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #040608;
+            --bg-card: #0F141E;
+            --text-primary: #FAFAFC;
+            --text-dim: #8C91A0;
+            --accent-green: #00FF82;
+            --cta-red: #FF3C47;
+            --cta-red-light: #FF5F6E;
+            --border: #23282F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Ticker Bar */
+        .ticker-bar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ticker-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticker-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .ticker-right {
+            color: var(--accent-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        .eyebrow::before {
+            content: '';
+            width: 3px;
+            height: 16px;
+            background: var(--accent-green);
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent-green);
+        }
+
+        .hero-subhead {
+            font-size: 20px;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Metric Block */
+        .metric-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            text-align: left;
+        }
+
+        .metric-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .metric-number {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--accent-green);
+        }
+
+        .metric-trend {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent-green);
+        }
+
+        /* Data Row */
+        .data-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-col {
+            text-align: center;
+        }
+
+        .data-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+
+        .data-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .data-value.price {
+            color: var(--accent-green);
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(180deg, var(--cta-red-light) 0%, var(--cta-red) 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 20px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(255, 60, 71, 0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        /* Why Different */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .why-card {
+            text-align: center;
+        }
+
+        .why-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .why-card h3::before {
+            content: '';
+            width: 3px;
+            height: 20px;
+            background: var(--accent-green);
+        }
+
+        .why-card p {
+            color: var(--text-dim);
+            font-size: 15px;
+        }
+
+        /* What's Inside */
+        .inside-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .inside-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .inside-marker {
+            width: 4px;
+            height: 24px;
+            background: var(--accent-green);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .inside-item p {
+            color: var(--text-dim);
+            font-size: 15px;
+        }
+
+        /* For/Not For */
+        .for-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .for-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .for-card.for-you {
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .for-card.not-for {
+            border-left: 4px solid var(--cta-red);
+        }
+
+        .for-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .for-card.for-you .for-eyebrow {
+            color: var(--accent-green);
+        }
+
+        .for-card.not-for .for-eyebrow {
+            color: var(--cta-red);
+        }
+
+        .for-card ul {
+            list-style: none;
+        }
+
+        .for-card li {
+            padding: 8px 0;
+            color: var(--text-dim);
+            font-size: 15px;
+        }
+
+        .for-card li::before {
+            content: '—';
+            margin-right: 12px;
+            color: var(--text-dim);
+        }
+
+        /* Booking Section */
+        .booking-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .booking-section .section-title {
+            margin-bottom: 16px;
+        }
+
+        .booking-subtext {
+            color: var(--text-dim);
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .cal-embed {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .inside-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .for-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ticker Bar -->
+    <div class="ticker-bar">
+        <div class="container">
+            <div class="ticker-left">
+                <span class="status-dot"></span>
+                <span>FAIP::FRACTIONAL.AI.PARTNER</span>
+            </div>
+            <div class="ticker-right">
+                AA01 · LIVE · 10 SLOTS
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="eyebrow">For Acquisition Entrepreneurs</div>
+            <h1>
+                You bought it.<br>
+                Now print<br>
+                <span class="highlight">the EBITDA.</span>
+            </h1>
+            <p class="hero-subhead">
+                Most acquirers spend month 1-3 firefighting.
+                We spend them engineering EBITDA you'll harvest at exit.
+            </p>
+
+            <div class="metric-block">
+                <div class="metric-label">Estimated Equity Value Lift</div>
+                <div class="metric-value">
+                    <span class="metric-number">$1,000,000</span>
+                    <span class="metric-trend">▲ +25% MULTIPLE</span>
+                </div>
+            </div>
+
+            <div class="data-row">
+                <div class="data-col">
+                    <div class="data-label">EBITDA Lift</div>
+                    <div class="data-value">$200,000</div>
+                </div>
+                <div class="data-col">
+                    <div class="data-label">Multiple</div>
+                    <div class="data-value">5x</div>
+                </div>
+                <div class="data-col">
+                    <div class="data-label">Timeline</div>
+                    <div class="data-value">90 DAYS</div>
+                </div>
+                <div class="data-col">
+                    <div class="data-label">Price</div>
+                    <div class="data-value price">$0</div>
+                </div>
+            </div>
+
+            <a href="#booking" class="cta-button">
+                CLAIM YOUR FREE $5K AUDIT →
+            </a>
+        </div>
+    </section>
+
+    <!-- Why Different Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why this audit is different</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <h3>We're operators, not consultants.</h3>
+                    <p>Yogi runs a 16-agent AI infrastructure across multiple holdings. Receipts in every audit.</p>
+                </div>
+                <div class="why-card">
+                    <h3>We speak EBITDA, not "AI strategy."</h3>
+                    <p>Every recommendation quantified in lift dollars and exit-multiple math.</p>
+                </div>
+                <div class="why-card">
+                    <h3>We hand you the roadmap.</h3>
+                    <p>The audit is yours whether you hire us or not. No strings attached.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Inside Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Inside the 90-Day Audit</h2>
+            </div>
+            <div class="inside-grid">
+                <div class="inside-item">
+                    <div class="inside-marker"></div>
+                    <p>90-min deep-dive on the business you just bought</p>
+                </div>
+                <div class="inside-item">
+                    <div class="inside-marker"></div>
+                    <p>5+ AI levers ranked by EBITDA impact</p>
+                </div>
+                <div class="inside-item">
+                    <div class="inside-marker"></div>
+                    <p>Quantified lift per opportunity, no fluff</p>
+                </div>
+                <div class="inside-item">
+                    <div class="inside-marker"></div>
+                    <p>90-day execution roadmap, yours to keep</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For/Not For Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Who it's for</h2>
+            </div>
+            <div class="for-grid">
+                <div class="for-card for-you">
+                    <div class="for-eyebrow">FOR YOU IF —</div>
+                    <ul>
+                        <li>You closed (or are closing) a $1M-$50M EBITDA business</li>
+                        <li>You want to lift the multiple before exit</li>
+                        <li>You don't want to rebuild the org chart to do it</li>
+                    </ul>
+                </div>
+                <div class="for-card not-for">
+                    <div class="for-eyebrow">NOT FOR YOU IF —</div>
+                    <ul>
+                        <li>Pre-revenue startup</li>
+                        <li>Roll-up under $1M EBITDA</li>
+                        <li>Want AI for the sake of AI</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section" id="booking">
+        <div class="container">
+            <h2 class="section-title">Book Your Audit</h2>
+            <p class="booking-subtext">
+                A 30-minute discovery call. We'll qualify the fit, then schedule the deep-dive.
+            </p>
+            <div class="cal-embed">
+                <!-- Cal.com embed will go here -->
+                <iframe 
+                    src="https://cal.com/yogi-muller/aa-mag-free-audit" 
+                    style="width: 100%; height: 600px; border: none;"
+                    frameborder="0">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                FAIP — A Black Pegasus Group company | thefaip.com
+            </p>
+        </div>
+    </footer>
+
+    <!-- UTM Capture Script -->
+    <script>
+        // Capture UTM parameters and store in localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmCampaign = urlParams.get('utm_campaign');
+        
+        if (utmCampaign) {
+            localStorage.setItem('utm_campaign', utmCampaign);
+            
+            // Also pass to Cal.com via URL
+            const calIframe = document.querySelector('iframe');
+            if (calIframe && !calIframe.src.includes('utm_campaign')) {
+                calIframe.src = calIframe.src + '?utm_campaign=' + encodeURIComponent(utmCampaign);
+            }
+        }
+    </script>
+</body>
+</html>
