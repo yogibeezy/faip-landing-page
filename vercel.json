@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/aa1/$1", "has": [{ "type": "host", "value": "aa1.thefaip.com" }] },
+    { "source": "/(.*)", "destination": "/aa2/$1", "has": [{ "type": "host", "value": "aa2.thefaip.com" }] },
+    { "source": "/(.*)", "destination": "/aa3/$1", "has": [{ "type": "host", "value": "aa3.thefaip.com" }] }
+  ]
+}
