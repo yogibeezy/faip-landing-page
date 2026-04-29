@@ -580,20 +580,40 @@
         </div>
     </footer>
 
-    <!-- UTM Capture Script -->
+    <!-- UTM + Source Capture Script -->
     <script>
-        // Capture UTM parameters and store in localStorage
+        // Capture which subdomain they came from (aa1, aa2, aa3)
+        const hostname = window.location.hostname;
+        let source = 'direct';
+        if (hostname.includes('aa1.')) source = 'aa1-issue1';
+        else if (hostname.includes('aa2.')) source = 'aa2-issue2';
+        else if (hostname.includes('aa3.')) source = 'aa3-issue3';
+        
+        localStorage.setItem('faip_source', source);
+        
+        // Also check URL params for UTM
         const urlParams = new URLSearchParams(window.location.search);
-        const utmCampaign = urlParams.get('utm_campaign');
+        const utmCampaign = urlParams.get('utm_campaign') || source;
         
         if (utmCampaign) {
             localStorage.setItem('utm_campaign', utmCampaign);
-            
-            // Also pass to Cal.com via URL
-            const calIframe = document.querySelector('iframe');
-            if (calIframe && !calIframe.src.includes('utm_campaign')) {
-                calIframe.src = calIframe.src + '?utm_campaign=' + encodeURIComponent(utmCampaign);
-            }
+        }
+        
+        // Update ticker to show which issue they're from
+        const tickerRight = document.querySelector('.ticker-right');
+        if (tickerRight && source !== 'direct') {
+            const issueNum = source.includes('issue1') ? '01' : source.includes('issue2') ? '02' : '03';
+            tickerRight.textContent = `AA${issueNum} · LIVE · 10 SLOTS`;
+        }
+        
+        // Pass source to Cal.com via URL
+        const calIframe = document.querySelector('iframe');
+        if (calIframe) {
+            let calUrl = calIframe.src;
+            if (!calUrl.includes('?')) calUrl += '?';
+            else calUrl += '&';
+            calUrl += 'utm_campaign=' + encodeURIComponent(utmCampaign || source);
+            calIframe.src = calUrl;
         }
     </script>
 </body>
